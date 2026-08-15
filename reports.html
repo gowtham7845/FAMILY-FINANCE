@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports — Smart Family Finance Manager</title>
+<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/dashboard.css">
+<link rel="stylesheet" href="./css/tables.css">
+<link rel="stylesheet" href="./css/forms.css">
+<link rel="stylesheet" href="./css/responsive.css">
+</head>
+<body data-page="reports">
+
+<div class="app-shell">
+  <div class="sidebar-backdrop" data-sidebar-close></div>
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+      <div class="brand-text">SMART FAMILY<span>FINANCE MANAGER</span></div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="./dashboard.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Dashboard</a>
+      <a href="./income.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></svg>Income</a>
+      <a href="./expenses.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12l7 7 7-7"/></svg>Expenses</a>
+      <a href="./borrowed.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 7v5l3 3"/></svg>Borrowed Money</a>
+      <a href="./repayments.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg>Repayments</a>
+      <a href="./transactions.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>Transactions</a>
+      <a href="./reports.html" class="nav-link active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-6M12 17V7M15 17v-3M4 20h16"/></svg>Reports</a>
+      <a href="./profile.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path stroke-linecap="round" d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="avatar" id="sidebar-avatar">?</div>
+        <div class="info"><strong id="sidebar-name">Loading...</strong><span id="sidebar-email"></span></div>
+      </div>
+      <button class="logout-btn" data-logout><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="mobile-topbar">
+      <button data-sidebar-open aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <div class="brand-text" style="font-size:0.8rem;font-weight:700;">SMART FAMILY FINANCE</div>
+      <div style="width:24px"></div>
+    </div>
+    <div class="content-topbar">
+      <div><h1>Monthly Reports</h1><p>Generate a detailed report for any month</p></div>
+    </div>
+
+    <div class="page-body">
+      <div class="glass-card section-card">
+        <div class="section-card-head">
+          <div><h2>Select Period</h2><p>Choose a month and year to generate your report</p></div>
+        </div>
+        <div class="filter-bar">
+          <select id="month-select">
+            <option value="1">January</option><option value="2">February</option><option value="3">March</option>
+            <option value="4">April</option><option value="5">May</option><option value="6">June</option>
+            <option value="7">July</option><option value="8">August</option><option value="9">September</option>
+            <option value="10">October</option><option value="11">November</option><option value="12">December</option>
+          </select>
+          <select id="year-select"></select>
+          <button class="btn-primary" style="width:auto;padding:11px 20px;" id="generate-report">
+            <span class="spinner"></span><span>Generate Report</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="empty-state glass-card section-card" id="report-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-6M12 17V7M15 17v-3M4 20h16"/></svg>
+        <h4>No report generated yet.</h4>
+        <p>Select a month and year, then click Generate Report.</p>
+      </div>
+
+      <div id="report-results" style="display:none">
+        <div class="glass-card section-card">
+          <div class="section-card-head">
+            <div><h2 id="report-month-label">—</h2><p>Report summary</p></div>
+            <div class="topbar-actions">
+              <button class="btn-secondary" id="download-csv">Download CSV</button>
+              <button class="btn-secondary" id="download-excel">Download Excel</button>
+              <button class="btn-primary" style="width:auto;padding:10px 18px;" id="download-pdf">Download PDF</button>
+            </div>
+          </div>
+
+          <div class="stat-grid">
+            <div class="stat-card stat-income" style="background:rgba(255,255,255,0.03);border-radius:var(--radius-md);"><div class="stat-label">Total Income</div><div class="stat-value" id="rep-income">₹0.00</div></div>
+            <div class="stat-card stat-expense" style="background:rgba(255,255,255,0.03);border-radius:var(--radius-md);"><div class="stat-label">Total Expenses</div><div class="stat-value" id="rep-expense">₹0.00</div></div>
+            <div class="stat-card stat-borrowed" style="background:rgba(255,255,255,0.03);border-radius:var(--radius-md);"><div class="stat-label">Total Borrowed</div><div class="stat-value" id="rep-borrowed">₹0.00</div></div>
+            <div class="stat-card stat-repayment" style="background:rgba(255,255,255,0.03);border-radius:var(--radius-md);"><div class="stat-label">Total Repayment</div><div class="stat-value" id="rep-repayment">₹0.00</div></div>
+            <div class="stat-card stat-outstanding" style="background:rgba(255,255,255,0.03);border-radius:var(--radius-md);"><div class="stat-label">Outstanding Borrowed</div><div class="stat-value" id="rep-outstanding">₹0.00</div></div>
+            <div class="stat-card stat-balance" style="background:rgba(255,255,255,0.03);border-radius:var(--radius-md);"><div class="stat-label">Net Balance</div><div class="stat-value" id="rep-balance">₹0.00</div></div>
+          </div>
+
+          <div class="form-grid" style="margin-top:8px;">
+            <div class="full"><p class="cell-muted">Largest Expense</p><p id="rep-largest-expense" style="font-weight:600;margin-top:4px;">—</p></div>
+            <div><p class="cell-muted">Top Expense Category</p><p id="rep-top-category" style="font-weight:600;margin-top:4px;">—</p></div>
+            <div><p class="cell-muted">Number of Transactions</p><p id="rep-txn-count" style="font-weight:600;margin-top:4px;">0</p></div>
+          </div>
+        </div>
+
+        <div class="chart-grid">
+          <div class="glass-card chart-card">
+            <h3>Income Breakdown</h3><p class="chart-sub">By source</p>
+            <div id="income-breakdown"></div>
+          </div>
+          <div class="glass-card chart-card">
+            <h3>Expense Breakdown</h3><p class="chart-sub">By category</p>
+            <div id="expense-breakdown"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script type="module" src="./js/reports.js"></script>
+</body>
+</html>

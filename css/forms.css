@@ -1,0 +1,54 @@
+/* =========================================================
+   FORMS — used in income/expense/borrowed/repayment modals + profile
+   ========================================================= */
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-grid .full { grid-column: 1 / -1; }
+
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 0.8rem; color: var(--text-2); margin-bottom: 7px; font-weight: 500; }
+.form-group label .required-mark { color: var(--expense); }
+
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass);
+  color: var(--text-1); padding: 12px 13px; border-radius: var(--radius-sm); font-size: 0.9rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-group textarea { resize: vertical; min-height: 70px; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  outline: none; border-color: var(--purple); box-shadow: 0 0 0 4px rgba(124,92,255,0.14);
+}
+.form-group input.field-error, .form-group select.field-error { border-color: var(--expense); }
+.form-group select option { background: var(--navy-800); }
+
+.form-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 22px; }
+.form-actions button { min-width: 110px; }
+.form-actions .btn-primary { width: auto; padding: 12px 22px; }
+
+.chip-select { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.chip-select button {
+  padding: 8px 14px; border-radius: 20px; border: 1px solid var(--border-glass);
+  background: rgba(255,255,255,0.03); color: var(--text-2); font-size: 0.82rem; font-weight: 500;
+  transition: all 0.2s;
+}
+.chip-select button.selected { background: var(--grad-primary); color: #fff; border-color: transparent; }
+
+/* Filter bar (search/filter/sort controls) */
+.filter-bar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 18px; }
+.filter-bar input[type="text"], .filter-bar input[type="search"] {
+  flex: 1; min-width: 180px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass);
+  color: var(--text-1); padding: 10px 14px; border-radius: var(--radius-sm); font-size: 0.86rem;
+}
+.filter-bar select, .filter-bar input[type="month"], .filter-bar input[type="date"], .filter-bar input[type="number"] {
+  background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass);
+  color: var(--text-1); padding: 10px 12px; border-radius: var(--radius-sm); font-size: 0.85rem;
+}
+.filter-bar input:focus, .filter-bar select:focus { outline: none; border-color: var(--purple); }
+
+.reason-box {
+  margin-top: 16px; padding: 14px; border-radius: var(--radius-sm);
+  background: rgba(251,146,60,0.06); border: 1px solid rgba(251,146,60,0.2);
+}
+.reason-box .diff-row { display: flex; justify-content: space-between; font-size: 0.83rem; padding: 6px 0; border-bottom: 1px dashed var(--border-glass); }
+.reason-box .diff-row:last-child { border-bottom: none; }
+.reason-box .diff-row span:first-child { color: var(--text-3); }

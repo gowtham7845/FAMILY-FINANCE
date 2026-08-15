@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Smart Family Finance Manager</title>
+<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/dashboard.css">
+<link rel="stylesheet" href="./css/tables.css">
+<link rel="stylesheet" href="./css/forms.css">
+<link rel="stylesheet" href="./css/responsive.css">
+</head>
+<body data-page="dashboard">
+
+<div class="app-shell">
+  <div class="sidebar-backdrop" data-sidebar-close></div>
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+      <div class="brand-text">SMART FAMILY<span>FINANCE MANAGER</span></div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="./dashboard.html" class="nav-link active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Dashboard</a>
+      <a href="./income.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></svg>Income</a>
+      <a href="./expenses.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12l7 7 7-7"/></svg>Expenses</a>
+      <a href="./borrowed.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 7v5l3 3"/></svg>Borrowed Money</a>
+      <a href="./repayments.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg>Repayments</a>
+      <a href="./transactions.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>Transactions</a>
+      <a href="./reports.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-6M12 17V7M15 17v-3M4 20h16"/></svg>Reports</a>
+      <a href="./profile.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path stroke-linecap="round" d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="avatar" id="sidebar-avatar">?</div>
+        <div class="info"><strong id="sidebar-name">Loading...</strong><span id="sidebar-email"></span></div>
+      </div>
+      <button class="logout-btn" data-logout><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="mobile-topbar">
+      <button data-sidebar-open aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <div class="brand-text" style="font-size:0.8rem;font-weight:700;">SMART FAMILY FINANCE</div>
+      <div style="width:24px"></div>
+    </div>
+
+    <div class="content-topbar">
+      <div>
+        <h1>Welcome, <span id="welcome-name">...</span></h1>
+        <p><span class="badge badge-normal">NORMAL ACCOUNT</span></p>
+      </div>
+    </div>
+
+    <div class="page-body">
+      <div class="stat-grid">
+        <div class="glass-card stat-card stat-income"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></svg></div><div class="stat-label">Total Income</div><div class="stat-value loading" id="stat-income">Loading…</div></div>
+        <div class="glass-card stat-card stat-expense"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12l7 7 7-7"/></svg></div><div class="stat-label">Total Expenses</div><div class="stat-value loading" id="stat-expense">Loading…</div></div>
+        <div class="glass-card stat-card stat-borrowed"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 7v5l3 3"/></svg></div><div class="stat-label">Total Borrowed</div><div class="stat-value loading" id="stat-borrowed">Loading…</div></div>
+        <div class="glass-card stat-card stat-repayment"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 1l4 4-4 4"/></svg></div><div class="stat-label">Total Repayment</div><div class="stat-value loading" id="stat-repayment">Loading…</div></div>
+        <div class="glass-card stat-card stat-balance"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path stroke-linecap="round" d="M2 10h20"/></svg></div><div class="stat-label">Available Balance</div><div class="stat-value loading" id="stat-balance">Loading…</div></div>
+        <div class="glass-card stat-card stat-outstanding"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg></div><div class="stat-label">Outstanding Borrowed</div><div class="stat-value loading" id="stat-outstanding">Loading…</div></div>
+      </div>
+
+      <div class="chart-grid">
+        <div class="glass-card chart-card">
+          <h3>Income vs Expenses</h3><p class="chart-sub">Last 6 months</p>
+          <canvas id="chart-income-expense" height="120"></canvas>
+          <div class="empty-state" id="empty-income-expense" style="display:none"><h4>No data yet</h4><p>Add income or expenses to see this chart.</p></div>
+        </div>
+        <div class="glass-card chart-card">
+          <h3>Borrowed vs Repayment</h3><p class="chart-sub">Last 6 months</p>
+          <canvas id="chart-borrowed-repayment" height="120"></canvas>
+          <div class="empty-state" id="empty-borrowed-repayment" style="display:none"><h4>No data yet</h4><p>Add borrowed money to see this chart.</p></div>
+        </div>
+        <div class="glass-card chart-card">
+          <h3>Monthly Spending</h3><p class="chart-sub">Trend over time</p>
+          <canvas id="chart-monthly-spending" height="120"></canvas>
+          <div class="empty-state" id="empty-monthly-spending" style="display:none"><h4>No data yet</h4><p>Track expenses to see spending trends.</p></div>
+        </div>
+        <div class="glass-card chart-card">
+          <h3>Expense Categories</h3><p class="chart-sub">Where your money goes</p>
+          <canvas id="chart-category" height="120"></canvas>
+          <div class="empty-state" id="empty-category" style="display:none"><h4>No data yet</h4><p>Add expenses to see category breakdown.</p></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<script type="module" src="./js/dashboard.js"></script>
+</body>
+</html>

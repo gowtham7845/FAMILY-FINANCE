@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile — Smart Family Finance Manager</title>
+<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/dashboard.css">
+<link rel="stylesheet" href="./css/tables.css">
+<link rel="stylesheet" href="./css/forms.css">
+<link rel="stylesheet" href="./css/responsive.css">
+</head>
+<body data-page="profile">
+
+<div class="app-shell">
+  <div class="sidebar-backdrop" data-sidebar-close></div>
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+      <div class="brand-text">SMART FAMILY<span>FINANCE MANAGER</span></div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="./dashboard.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Dashboard</a>
+      <a href="./income.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></svg>Income</a>
+      <a href="./expenses.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12l7 7 7-7"/></svg>Expenses</a>
+      <a href="./borrowed.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 7v5l3 3"/></svg>Borrowed Money</a>
+      <a href="./repayments.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg>Repayments</a>
+      <a href="./transactions.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>Transactions</a>
+      <a href="./reports.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-6M12 17V7M15 17v-3M4 20h16"/></svg>Reports</a>
+      <a href="./profile.html" class="nav-link active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path stroke-linecap="round" d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="avatar" id="sidebar-avatar">?</div>
+        <div class="info"><strong id="sidebar-name">Loading...</strong><span id="sidebar-email"></span></div>
+      </div>
+      <button class="logout-btn" data-logout><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="mobile-topbar">
+      <button data-sidebar-open aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <div class="brand-text" style="font-size:0.8rem;font-weight:700;">SMART FAMILY FINANCE</div>
+      <div style="width:24px"></div>
+    </div>
+    <div class="content-topbar">
+      <div><h1>Profile</h1><p>Manage your personal information</p></div>
+    </div>
+
+    <div class="page-body">
+      <div class="glass-card section-card" style="max-width:640px;">
+        <div class="section-card-head">
+          <div><h2>Account Details</h2><p>Your role and status are managed by Master Control and cannot be changed here.</p></div>
+        </div>
+
+        <div class="form-grid" style="margin-bottom:22px;">
+          <div><p class="cell-muted">Account Type</p><p style="margin-top:6px;"><span class="badge badge-normal" id="profile-account-type">NORMAL ACCOUNT</span></p></div>
+          <div><p class="cell-muted">Account Status</p><p style="margin-top:6px;"><span class="badge badge-paid" id="profile-status">Active</span></p></div>
+          <div><p class="cell-muted">Registration Date</p><p style="font-weight:600;margin-top:6px;" id="profile-created">—</p></div>
+        </div>
+
+        <form id="profile-form" novalidate>
+          <div class="form-group">
+            <label for="p-fullname">Full Name <span class="required-mark">*</span></label>
+            <input type="text" id="p-fullname">
+          </div>
+          <div class="form-group">
+            <label for="p-email">Email Address</label>
+            <input type="email" id="p-email" disabled>
+          </div>
+          <div class="form-group">
+            <label for="p-phone">Phone Number</label>
+            <input type="tel" id="p-phone">
+          </div>
+          <div class="form-actions" style="justify-content:flex-start;">
+            <button type="submit" class="btn-primary" id="profile-submit" style="width:auto"><span class="spinner"></span><span class="btn-label">Save Changes</span></button>
+          </div>
+        </form>
+      </div>
+
+      <div class="glass-card section-card" style="max-width:640px;">
+        <div class="section-card-head">
+          <div><h2>Change Password</h2><p>We'll email you a secure reset link</p></div>
+        </div>
+        <button class="btn-secondary" id="send-reset-link" style="width:auto;padding:11px 18px;">Send Password Reset Email</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script type="module" src="./js/profile.js"></script>
+</body>
+</html>

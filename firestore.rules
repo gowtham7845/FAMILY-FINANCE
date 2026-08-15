@@ -1,0 +1,103 @@
+rules_version = '2';
+
+// =========================================================
+// SMART FAMILY FINANCE MANAGER — FIRESTORE SECURITY RULES
+//
+// Authorization model:
+//   - Every normal user can read/write ONLY their own
+//     users/{uid} profile and users/{uid}/** subcollections.
+//   - Master Control access is granted ONLY to a UID that has
+//     a document at authorizedAdmins/{uid}. That collection is
+//     NEVER writable from the client — it can only be created
+//     by a trusted administrator directly in the Firebase
+//     Console or via the Admin SDK in a secure environment.
+//     A user can NEVER promote themselves, regardless of what
+//     they edit on their own profile document, because nothing
+//     in these rules trusts a self-editable field such as
+//     users/{uid}.accountType.
+//   - auditLogs can be created by an authorized Master Control
+//     user only, and can never be updated or deleted by anyone
+//     from the client (immutable audit trail).
+// =========================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    // The ONLY source of truth for Master Control authorization.
+    // This collection is not writable by any client rule below,
+    // so it can only be populated by a trusted admin process.
+    function isMaster() {
+      return isSignedIn() &&
+        exists(/databases/$(database)/documents/authorizedAdmins/$(request.auth.uid));
+    }
+
+    // ---------------- authorizedAdmins ----------------
+    // Master Control membership list. Readable by an authenticated
+    // user only to check their own authorization; never writable
+    // from any client. Assign entries from the Firebase Console
+    // or a trusted Admin SDK environment only.
+    match /authorizedAdmins/{uid} {
+      allow read: if isSignedIn() && request.auth.uid == uid;
+      allow write: if false;
+    }
+
+    // ---------------- users/{uid} ----------------
+    match /users/{uid} {
+      allow read: if isOwner(uid) || isMaster();
+
+      // A user may create their own profile document only once,
+      // at registration, and only with safe defaults.
+      allow create: if isOwner(uid)
+        && request.resource.data.accountType == "normal"
+        && request.resource.data.status == "active";
+
+      // Normal users may update their own profile but can NEVER
+      // change accountType or status themselves.
+      allow update: if isOwner(uid)
+        && request.resource.data.accountType == resource.data.accountType
+        && request.resource.data.status == resource.data.status
+        || isMaster();
+
+      allow delete: if false;
+
+      // Financial subcollections: income, expenses, borrowed, repayments, transactions
+      match /{collection}/{docId} {
+        allow read: if isOwner(uid) || isMaster();
+        allow create, update, delete: if isOwner(uid) || isMaster();
+      }
+    }
+
+    // ---------------- auditLogs ----------------
+    // Immutable from the client once written (no client can ever
+    // update or delete an entry). A normal user may CREATE an
+    // entry only for their own actions on their own data (so their
+    // own income/expense/borrowed/repayment CRUD is logged) but can
+    // never create an entry that targets someone else's account, and
+    // can never modify audit logs once written. Master Control may
+    // create entries for any target (user management, record edits)
+    // and is the only role that can read the audit log, since it is
+    // an administrative feature.
+    match /auditLogs/{logId} {
+      allow read: if isMaster();
+      allow create: if isMaster() || (
+        isSignedIn() &&
+        request.resource.data.performedBy == request.auth.uid &&
+        request.resource.data.targetUser == request.auth.uid
+      );
+      allow update, delete: if false;
+    }
+
+    // Deny everything else by default.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

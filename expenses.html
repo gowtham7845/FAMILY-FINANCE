@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expenses — Smart Family Finance Manager</title>
+<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/dashboard.css">
+<link rel="stylesheet" href="./css/tables.css">
+<link rel="stylesheet" href="./css/forms.css">
+<link rel="stylesheet" href="./css/responsive.css">
+</head>
+<body data-page="expenses">
+
+<div class="app-shell">
+  <div class="sidebar-backdrop" data-sidebar-close></div>
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+      <div class="brand-text">SMART FAMILY<span>FINANCE MANAGER</span></div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="./dashboard.html" class="nav-link "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Dashboard</a>
+      <a href="./income.html" class="nav-link "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></svg>Income</a>
+      <a href="./expenses.html" class="nav-link active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12l7 7 7-7"/></svg>Expenses</a>
+      <a href="./borrowed.html" class="nav-link "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 7v5l3 3"/></svg>Borrowed Money</a>
+      <a href="./repayments.html" class="nav-link "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg>Repayments</a>
+      <a href="./transactions.html" class="nav-link "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>Transactions</a>
+      <a href="./reports.html" class="nav-link "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-6M12 17V7M15 17v-3M4 20h16"/></svg>Reports</a>
+      <a href="./profile.html" class="nav-link "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path stroke-linecap="round" d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="avatar" id="sidebar-avatar">?</div>
+        <div class="info"><strong id="sidebar-name">Loading...</strong><span id="sidebar-email"></span></div>
+      </div>
+      <button class="logout-btn" data-logout><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="mobile-topbar">
+      <button data-sidebar-open aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <div class="brand-text" style="font-size:0.8rem;font-weight:700;">SMART FAMILY FINANCE</div>
+      <div style="width:24px"></div>
+    </div>
+    <div class="content-topbar">
+      <div><h1>Expenses</h1><p>Track where your family's money goes</p></div>
+      <div class="topbar-actions">
+        <button class="btn-primary" style="width:auto;padding:11px 18px;" id="open-add-expense"><span>+ Add Expense</span></button>
+      </div>
+    </div>
+    <div class="page-body">
+      <div class="glass-card section-card">
+        <div class="filter-bar">
+          <input type="text" id="search-input" placeholder="Search by reason or category...">
+          <select id="category-filter">
+            <option value="all">All Categories</option>
+            <option value="Food">Food</option>
+            <option value="Education">Education</option>
+            <option value="Transport">Transport</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Medical">Medical</option>
+            <option value="Bills">Bills</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Other">Other</option>
+          </select>
+          <select id="sort-select">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="highest">Highest Amount</option>
+            <option value="lowest">Lowest Amount</option>
+          </select>
+        </div>
+
+        <div class="loading-state" id="expense-loading"><div class="spinner dark active"></div>Loading expense records...</div>
+        <div class="empty-state" id="expense-empty" style="display:none">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12l7 7 7-7"/></svg>
+          <h4>No expenses found.</h4>
+          <p>Add your first expense to start tracking.</p>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Category</th><th>Amount</th><th>Reason</th><th>Date</th><th>Time</th><th>Actions</th></tr></thead>
+            <tbody id="expense-list"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<div class="modal-overlay" id="expense-modal">
+  <div class="glass-card modal-box">
+    <button class="modal-close" data-modal-close aria-label="Close"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M18 6L6 18M6 6l12 12"/></svg></button>
+    <h3 id="modal-title">Add Expense</h3>
+    <form id="expense-form" novalidate>
+      <div class="form-group">
+        <label for="f-category">Category <span class="required-mark">*</span></label>
+        <select id="f-category">
+          <option value="Food">Food</option>
+          <option value="Education">Education</option>
+          <option value="Transport">Transport</option>
+          <option value="Shopping">Shopping</option>
+          <option value="Medical">Medical</option>
+          <option value="Bills">Bills</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="f-amount">Amount (₹) <span class="required-mark">*</span></label>
+        <input type="number" id="f-amount" min="0.01" step="0.01" placeholder="500">
+      </div>
+      <div class="form-group">
+        <label for="f-reason">Reason <span class="required-mark">*</span></label>
+        <input type="text" id="f-reason" placeholder="Weekly groceries">
+      </div>
+      <div class="modal-form-row">
+        <div class="form-group">
+          <label for="f-date">Date <span class="required-mark">*</span></label>
+          <input type="date" id="f-date">
+        </div>
+        <div class="form-group">
+          <label for="f-time">Time</label>
+          <input type="time" id="f-time">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="f-notes">Notes</label>
+        <textarea id="f-notes" placeholder="Optional notes"></textarea>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" data-modal-close>Cancel</button>
+        <button type="submit" class="btn-primary" id="expense-submit" style="width:auto"><span class="spinner"></span><span>Save Expense</span></button>
+      </div>
+    </form>
+  </div>
+</div>
+<script type="module" src="./js/expenses.js"></script>
+</body>
+</html>

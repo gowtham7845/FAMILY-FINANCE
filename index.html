@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Family Finance Manager — Sign In</title>
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<div class="auth-page">
+  <div class="auth-bg"></div>
+  <div class="auth-particles"></div>
+
+  <div class="auth-shell">
+    <div class="auth-brand">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      </div>
+      <h1>SMART FAMILY<span>FINANCE MANAGER</span></h1>
+      <p class="tagline">Manage your family's money smarter.</p>
+      <div class="brand-stats">
+        <div><strong>Firebase</strong><span>Secured</span></div>
+        <div><strong>Real-time</strong><span>Sync</span></div>
+        <div><strong>Family</strong><span>First</span></div>
+      </div>
+    </div>
+
+    <div class="glass-card auth-card">
+      <h2>Welcome Back 👋</h2>
+      <p class="subtext">Sign in to continue managing your family finances.</p>
+
+      <form id="login-form" novalidate>
+        <div class="field-group">
+          <label for="login-email">Email Address</label>
+          <div class="field-input-wrap">
+            <input type="email" id="login-email" placeholder="you@example.com" autocomplete="email">
+          </div>
+          <div class="field-hint-error"></div>
+        </div>
+
+        <div class="field-group">
+          <label for="login-password">Password</label>
+          <div class="field-input-wrap">
+            <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password">
+            <button type="button" class="toggle-visibility" id="toggle-password" aria-label="Show password">
+              <svg id="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg id="eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path stroke-linecap="round" stroke-linejoin="round" d="M17.94 17.94A10.94 10.94 0 0112 20c-7 0-11-8-11-8a20.3 20.3 0 015.06-6.06M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a20.3 20.3 0 01-2.16 3.19M14.12 14.12a3 3 0 11-4.24-4.24M1 1l22 22"/></svg>
+            </button>
+          </div>
+          <div class="field-hint-error"></div>
+        </div>
+
+        <button type="submit" class="btn-primary" id="login-submit">
+          <span class="spinner"></span>
+          <span class="btn-label">Sign In</span>
+        </button>
+      </form>
+
+      <div class="auth-links-row">
+        <a href="#" id="open-forgot" class="link-accent">Forgot Password?</a>
+      </div>
+      <p class="auth-divider-text">Don't have an account? <a href="./register.html" class="link-accent">Create Account</a></p>
+
+      <div class="security-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Your financial data is protected with Firebase Authentication.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Forgot Password Modal -->
+<div class="modal-overlay" id="forgot-modal">
+  <div class="glass-card modal-box">
+    <button class="modal-close" data-modal-close aria-label="Close">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <h3>Reset Your Password</h3>
+    <p class="modal-desc">Enter your registered email address and we will send you a password reset link.</p>
+    <form id="forgot-form" novalidate>
+      <div class="field-group">
+        <label for="forgot-email">Email Address</label>
+        <input type="email" id="forgot-email" placeholder="you@example.com">
+      </div>
+      <button type="submit" class="btn-primary" id="forgot-submit">
+        <span class="spinner"></span>
+        <span>Send Reset Link</span>
+      </button>
+      <div class="modal-feedback" id="forgot-feedback"></div>
+    </form>
+  </div>
+</div>
+
+<script type="module" src="./js/auth.js"></script>
+</body>
+</html>

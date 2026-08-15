@@ -1,0 +1,24 @@
+/* =========================================================
+   GLOBAL RESPONSIVE OVERRIDES
+   ========================================================= */
+
+@media (max-width: 640px) {
+  .stat-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .stat-card { padding: 15px; }
+  .stat-card .stat-value { font-size: 1.2rem; }
+  .chart-grid { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .section-card { padding: 16px; }
+  .filter-bar { flex-direction: column; align-items: stretch; }
+  .filter-bar > * { width: 100%; }
+  .modal-form-row { flex-direction: column; gap: 0; }
+  .content-topbar h1 { font-size: 1.1rem; }
+  .topbar-actions .btn-secondary span.hide-mobile { display: none; }
+}
+
+@media (max-width: 400px) {
+  .stat-grid { grid-template-columns: 1fr; }
+}
+
+.hide-mobile { display: inline; }
+@media (max-width: 640px) { .hide-mobile { display: none; } }
