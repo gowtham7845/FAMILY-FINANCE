@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reports — Smart Family Finance Manager</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" as="script" crossorigin>
 <link rel="stylesheet" href="./css/style.css">
 <link rel="stylesheet" href="./css/dashboard.css">
 <link rel="stylesheet" href="./css/tables.css">
@@ -45,78 +48,271 @@
       <div style="width:24px"></div>
     </div>
     <div class="content-topbar">
-      <div><h1>Monthly Reports</h1><p>Generate a detailed report for any month</p></div>
+      <div><h1>Advanced Report Center</h1><p>Generate daily, weekly, monthly, yearly &amp; custom financial intelligence reports</p></div>
     </div>
 
     <div class="page-body">
+      <!-- Report Generator Configuration Card -->
       <div class="glass-card section-card">
         <div class="section-card-head">
-          <div><h2>Select Period</h2><p>Choose a month and year to generate your report</p></div>
+          <div><h2>Configure Report</h2><p>Choose your report timeframe, date parameters, and filtering criteria</p></div>
         </div>
-        <div class="filter-bar">
-          <select id="month-select">
-            <option value="1">January</option><option value="2">February</option><option value="3">March</option>
-            <option value="4">April</option><option value="5">May</option><option value="6">June</option>
-            <option value="7">July</option><option value="8">August</option><option value="9">September</option>
-            <option value="10">October</option><option value="11">November</option><option value="12">December</option>
-          </select>
-          <select id="year-select"></select>
-          <button class="btn-primary" style="width:auto;padding:11px 20px;" id="generate-report">
-            <span class="spinner"></span><span>Generate Report</span>
-          </button>
+
+        <!-- Report Mode Selection Chips -->
+        <div class="chip-select" id="report-mode-select" style="margin-bottom:16px;">
+          <button type="button" class="selected" data-mode="monthly">Monthly Report</button>
+          <button type="button" data-mode="daily">Daily Report</button>
+          <button type="button" data-mode="weekly">Weekly Report</button>
+          <button type="button" data-mode="yearly">Yearly Report</button>
+          <button type="button" data-mode="custom">Custom Date Range</button>
         </div>
-      </div>
 
-      <div class="empty-state glass-card section-card" id="report-placeholder">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-6M12 17V7M15 17v-3M4 20h16"/></svg>
-        <h4>No report generated yet.</h4>
-        <p>Select a month and year, then click Generate Report.</p>
-      </div>
+        <!-- Dynamic Date Controls -->
+        <div class="filter-bar" style="flex-wrap:wrap;gap:12px;">
+          <!-- Monthly Controls -->
+          <div id="ctrl-monthly" style="display:flex;gap:10px;flex-wrap:wrap;">
+            <select id="month-select" style="min-width:140px;">
+              <option value="1">January</option><option value="2">February</option><option value="3">March</option>
+              <option value="4">April</option><option value="5">May</option><option value="6">June</option>
+              <option value="7">July</option><option value="8">August</option><option value="9">September</option>
+              <option value="10">October</option><option value="11">November</option><option value="12">December</option>
+            </select>
+            <select id="year-select" style="min-width:110px;"></select>
+          </div>
 
-      <div id="report-results" style="display:none">
-        <div class="glass-card section-card">
-          <div class="section-card-head">
-            <div><h2 id="report-month-label">—</h2><p>Report summary</p></div>
-            <div class="topbar-actions">
-              <button class="btn-secondary" id="download-csv">Download CSV</button>
-              <button class="btn-secondary" id="download-excel">Download Excel</button>
-              <button class="btn-primary" style="width:auto;padding:10px 18px;" id="download-pdf">Download PDF</button>
+          <!-- Daily Controls -->
+          <div id="ctrl-daily" style="display:none;gap:10px;align-items:center;">
+            <label for="daily-date-input" style="font-size:0.85rem;color:var(--text-2);">Select Date:</label>
+            <input type="date" id="daily-date-input" style="min-width:160px;">
+          </div>
+
+          <!-- Weekly Controls -->
+          <div id="ctrl-weekly" style="display:none;gap:10px;flex-wrap:wrap;align-items:center;">
+            <select id="weekly-preset-select" style="min-width:140px;">
+              <option value="this_week">This Week</option>
+              <option value="last_week">Last Week</option>
+              <option value="custom_week">Custom Week</option>
+            </select>
+            <div id="custom-week-wrap" style="display:none;align-items:center;gap:8px;">
+              <span style="font-size:0.85rem;color:var(--text-2);">Week of:</span>
+              <input type="date" id="weekly-custom-date" style="min-width:150px;">
             </div>
           </div>
 
-          <div class="stat-grid">
-            <div class="stat-card stat-income" style="background:rgba(255,255,255,0.03);border-radius:var(--radius-md);"><div class="stat-label">Total Income</div><div class="stat-value" id="rep-income">₹0.00</div></div>
-            <div class="stat-card stat-expense" style="background:rgba(255,255,255,0.03);border-radius:var(--radius-md);"><div class="stat-label">Total Expenses</div><div class="stat-value" id="rep-expense">₹0.00</div></div>
-            <div class="stat-card stat-borrowed" style="background:rgba(255,255,255,0.03);border-radius:var(--radius-md);"><div class="stat-label">Total Borrowed</div><div class="stat-value" id="rep-borrowed">₹0.00</div></div>
-            <div class="stat-card stat-repayment" style="background:rgba(255,255,255,0.03);border-radius:var(--radius-md);"><div class="stat-label">Total Repayment</div><div class="stat-value" id="rep-repayment">₹0.00</div></div>
-            <div class="stat-card stat-outstanding" style="background:rgba(255,255,255,0.03);border-radius:var(--radius-md);"><div class="stat-label">Outstanding Borrowed</div><div class="stat-value" id="rep-outstanding">₹0.00</div></div>
-            <div class="stat-card stat-balance" style="background:rgba(255,255,255,0.03);border-radius:var(--radius-md);"><div class="stat-label">Net Balance</div><div class="stat-value" id="rep-balance">₹0.00</div></div>
+          <!-- Yearly Controls -->
+          <div id="ctrl-yearly" style="display:none;gap:10px;align-items:center;">
+            <label for="yearly-year-select" style="font-size:0.85rem;color:var(--text-2);">Select Year:</label>
+            <select id="yearly-year-select" style="min-width:120px;"></select>
           </div>
 
-          <div class="form-grid" style="margin-top:8px;">
-            <div class="full"><p class="cell-muted">Largest Expense</p><p id="rep-largest-expense" style="font-weight:600;margin-top:4px;">—</p></div>
-            <div><p class="cell-muted">Top Expense Category</p><p id="rep-top-category" style="font-weight:600;margin-top:4px;">—</p></div>
-            <div><p class="cell-muted">Number of Transactions</p><p id="rep-txn-count" style="font-weight:600;margin-top:4px;">0</p></div>
+          <!-- Custom Range Controls -->
+          <div id="ctrl-custom" style="display:none;gap:10px;flex-wrap:wrap;align-items:center;">
+            <label for="custom-start-date" style="font-size:0.85rem;color:var(--text-2);">From:</label>
+            <input type="date" id="custom-start-date" style="min-width:140px;">
+            <label for="custom-end-date" style="font-size:0.85rem;color:var(--text-2);">To:</label>
+            <input type="date" id="custom-end-date" style="min-width:140px;">
+          </div>
+
+          <!-- General Filters -->
+          <select id="type-filter" style="min-width:120px;">
+            <option value="all">All Types</option>
+            <option value="income">Income Only</option>
+            <option value="expense">Expenses Only</option>
+            <option value="borrowed">Borrowed Only</option>
+            <option value="repayment">Repayments Only</option>
+          </select>
+
+          <select id="category-filter" style="min-width:130px;">
+            <option value="all">All Categories</option>
+            <option value="Food">Food</option>
+            <option value="Education">Education</option>
+            <option value="Transport">Transport</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Medical">Medical</option>
+            <option value="Bills">Bills</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <button class="btn-primary" style="width:auto;padding:11px 22px;" id="generate-report">
+            <span class="spinner"></span><span>Generate Report</span>
+          </button>
+          <button class="btn-secondary" style="width:auto;padding:11px 18px;" id="reset-filters">Reset</button>
+        </div>
+
+        <label style="display:flex;align-items:center;gap:8px;margin-top:14px;font-size:0.85rem;color:var(--text-2);cursor:pointer;">
+          <input type="checkbox" id="compare-toggle" style="width:16px;height:16px;" checked>
+          Compare with previous period (Yesterday / Last Week / Last Month / Previous Year)
+        </label>
+      </div>
+
+      <!-- Placeholder Before Report Generation -->
+      <div class="empty-state glass-card section-card" id="report-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-6M12 17V7M15 17v-3M4 20h16"/></svg>
+        <h4>No report generated yet.</h4>
+        <p>Select your desired report parameters above and click <strong>Generate Report</strong>.</p>
+      </div>
+
+      <!-- Report Results View -->
+      <div id="report-results" style="display:none">
+        
+        <!-- Header & Action Bar -->
+        <div class="glass-card section-card" style="text-align:center;padding:24px;">
+          <p style="font-size:0.75rem;letter-spacing:0.08em;color:var(--purple-light);text-transform:uppercase;font-weight:700;">Smart Family Finance Intelligence</p>
+          <h2 id="report-title-label" style="margin-top:6px;font-size:1.6rem;">Monthly Family Finance Report</h2>
+          <p class="cell-muted" style="margin-top:4px;font-size:0.92rem;" id="report-period-label">—</p>
+          <p class="cell-muted" style="margin-top:4px;font-size:0.78rem;" id="report-generated-at">—</p>
+
+          <div class="topbar-actions" style="margin-top:18px;justify-content:center;flex-wrap:wrap;">
+            <button class="btn-secondary" id="download-csv"><span class="spinner"></span><span>Download CSV</span></button>
+            <button class="btn-secondary" id="download-excel"><span class="spinner"></span><span>Download Excel (.xlsx)</span></button>
+            <button class="btn-primary" style="width:auto;padding:10px 20px;" id="download-pdf"><span class="spinner"></span><span>Download PDF</span></button>
+            <button class="btn-secondary" id="print-report" style="width:auto;padding:10px 16px;"><span>🖨️ Print</span></button>
           </div>
         </div>
 
+        <!-- Executive Summary Cards -->
+        <div class="glass-card section-card">
+          <div class="section-card-head">
+            <div><h2>Executive Summary</h2><p>Overall financial balance, cash flow, and key indicators</p></div>
+          </div>
+
+          <div class="stat-grid">
+            <div class="stat-card stat-income" style="background:rgba(255,255,255,0.03);border-radius:var(--radius-md);">
+              <div class="stat-label">Total Income</div>
+              <div class="stat-value" id="rep-income">₹0.00</div>
+            </div>
+            <div class="stat-card stat-expense" style="background:rgba(255,255,255,0.03);border-radius:var(--radius-md);">
+              <div class="stat-label">Total Expenses</div>
+              <div class="stat-value" id="rep-expense">₹0.00</div>
+            </div>
+            <div class="stat-card stat-balance" style="background:rgba(255,255,255,0.03);border-radius:var(--radius-md);">
+              <div class="stat-label">Net Cash Flow</div>
+              <div class="stat-value" id="rep-net-cashflow">₹0.00</div>
+            </div>
+            <div class="stat-card stat-borrowed" style="background:rgba(255,255,255,0.03);border-radius:var(--radius-md);">
+              <div class="stat-label">Total Borrowed</div>
+              <div class="stat-value" id="rep-borrowed">₹0.00</div>
+            </div>
+            <div class="stat-card stat-repayment" style="background:rgba(255,255,255,0.03);border-radius:var(--radius-md);">
+              <div class="stat-label">Total Repaid</div>
+              <div class="stat-value" id="rep-repayment">₹0.00</div>
+            </div>
+            <div class="stat-card stat-outstanding" style="background:rgba(255,255,255,0.03);border-radius:var(--radius-md);">
+              <div class="stat-label">Outstanding Debt</div>
+              <div class="stat-value" id="rep-outstanding">₹0.00</div>
+            </div>
+          </div>
+
+          <!-- Secondary Metrics Grid -->
+          <div class="form-grid" style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border-glass);">
+            <div><p class="cell-muted">Average Daily Income</p><p id="rep-avg-daily-income" style="font-weight:600;margin-top:4px;">₹0.00</p></div>
+            <div><p class="cell-muted">Average Daily Expense</p><p id="rep-avg-daily-expense" style="font-weight:600;margin-top:4px;">₹0.00</p></div>
+            <div><p class="cell-muted">Highest Income Day</p><p id="rep-highest-income-day" style="font-weight:600;margin-top:4px;">—</p></div>
+            <div><p class="cell-muted">Highest Expense Day</p><p id="rep-highest-expense-day" style="font-weight:600;margin-top:4px;">—</p></div>
+            <div><p class="cell-muted">Top Expense Category</p><p id="rep-top-category" style="font-weight:600;margin-top:4px;">—</p></div>
+            <div><p class="cell-muted">Largest Single Expense</p><p id="rep-largest-expense" style="font-weight:600;margin-top:4px;">—</p></div>
+            <div><p class="cell-muted">Savings Rate</p><p id="rep-savings-rate" style="font-weight:600;margin-top:4px;">—</p></div>
+            <div><p class="cell-muted">Total Transaction Records</p><p id="rep-txn-count" style="font-weight:600;margin-top:4px;">0</p></div>
+          </div>
+        </div>
+
+        <!-- Previous Period Comparison Section -->
+        <div class="glass-card section-card" id="comparison-section" style="display:none">
+          <div class="section-card-head">
+            <div><h2>Previous Period Comparison</h2><p id="comparison-sub">—</p></div>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table" id="comparison-table" style="display:contents">
+              <thead><tr><th>Metric</th><th>Previous Period</th><th>Current Period</th><th>Difference</th><th>% Change</th></tr></thead>
+              <tbody id="comparison-list"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Interactive Charts Grid -->
+        <div class="chart-grid" id="report-charts-grid">
+          <div class="glass-card chart-card">
+            <h3 id="trend-chart-title">Cash Flow Trend</h3><p class="chart-sub" id="trend-chart-sub">Income vs Expenses over time</p>
+            <canvas id="report-trend-chart" height="130"></canvas>
+          </div>
+          <div class="glass-card chart-card">
+            <h3>Expense Category Breakdown</h3><p class="chart-sub">Where money was spent</p>
+            <canvas id="report-category-chart" height="130"></canvas>
+          </div>
+        </div>
+
+        <!-- Periodic Time Breakdown Table (e.g. 7 Days for Weekly, 12 Months for Yearly, Days for Monthly) -->
+        <div class="glass-card section-card" id="period-breakdown-card" style="display:none;">
+          <div class="section-card-head">
+            <div><h2 id="period-breakdown-title">Time Breakdown</h2><p id="period-breakdown-sub">Detailed periodic performance breakdown</p></div>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table" id="period-breakdown-table" style="display:contents">
+              <thead id="period-breakdown-head"></thead>
+              <tbody id="period-breakdown-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Daily Detailed Tables (Only shown for Daily Report or filtered views) -->
+        <div class="glass-card section-card" id="daily-detail-card" style="display:none;">
+          <div class="section-card-head">
+            <div><h2>Daily Income &amp; Expense Records</h2><p id="daily-detail-sub">Itemized records for the selected day</p></div>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table" style="display:contents">
+              <thead><tr><th>Time</th><th>Type</th><th>Source / Category</th><th>Description / Reason</th><th>Amount</th></tr></thead>
+              <tbody id="daily-detail-list"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Source & Category Analysis -->
         <div class="chart-grid">
           <div class="glass-card chart-card">
-            <h3>Income Breakdown</h3><p class="chart-sub">By source</p>
-            <div id="income-breakdown"></div>
+            <h3>Income by Source</h3><p class="chart-sub">Breakdown of inflow channels</p>
+            <div id="income-breakdown" style="display:flex;flex-direction:column;gap:8px;margin-top:10px;"></div>
           </div>
           <div class="glass-card chart-card">
-            <h3>Expense Breakdown</h3><p class="chart-sub">By category</p>
-            <div id="expense-breakdown"></div>
+            <h3>Expense by Category</h3><p class="chart-sub">Spending distributed by category</p>
+            <div id="expense-breakdown" style="display:flex;flex-direction:column;gap:8px;margin-top:10px;"></div>
           </div>
         </div>
+
+        <!-- Automated Insights -->
+        <div class="glass-card section-card">
+          <div class="section-card-head">
+            <div><h2>Financial Insights &amp; Observations</h2><p>Synthesized analysis derived from your authentic financial data</p></div>
+          </div>
+          <ul id="insights-list" style="display:flex;flex-direction:column;gap:10px;padding-left:0;"></ul>
+        </div>
+
+        <!-- Full Itemized Transaction Table with Pagination -->
+        <div class="glass-card section-card">
+          <div class="section-card-head">
+            <div><h2>Itemized Transactions</h2><p>All records included in this generated report</p></div>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table" id="report-txn-table" style="display:contents">
+              <thead><tr><th>Date</th><th>Time</th><th>Type</th><th>Category/Source</th><th>Amount</th><th>Reason/Notes</th></tr></thead>
+              <tbody id="report-txn-list"></tbody>
+            </table>
+          </div>
+          <div class="pagination-bar" id="report-pagination" style="display:none">
+            <span id="report-pagination-label"></span>
+            <div style="display:flex;gap:8px;">
+              <button class="btn-secondary" id="report-prev-page">Previous</button>
+              <button class="btn-secondary" id="report-next-page">Next</button>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </main>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script type="module" src="./js/reports.js"></script>
 </body>
 </html>

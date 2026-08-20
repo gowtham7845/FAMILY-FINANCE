@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard — Smart Family Finance Manager</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" as="script" crossorigin>
 <link rel="stylesheet" href="./css/style.css">
 <link rel="stylesheet" href="./css/dashboard.css">
 <link rel="stylesheet" href="./css/tables.css">
@@ -53,13 +56,19 @@
     </div>
 
     <div class="page-body">
+      <div class="empty-state glass-card section-card" id="dashboard-error-state" style="display:none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <h4>Unable to load financial data.</h4>
+        <p style="margin-bottom:16px;">Check your connection and try again. You can still use the rest of the site.</p>
+        <button class="btn-secondary" style="width:auto;padding:10px 22px;" data-retry>Retry</button>
+      </div>
       <div class="stat-grid">
-        <div class="glass-card stat-card stat-income"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></svg></div><div class="stat-label">Total Income</div><div class="stat-value loading" id="stat-income">Loading…</div></div>
-        <div class="glass-card stat-card stat-expense"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12l7 7 7-7"/></svg></div><div class="stat-label">Total Expenses</div><div class="stat-value loading" id="stat-expense">Loading…</div></div>
-        <div class="glass-card stat-card stat-borrowed"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 7v5l3 3"/></svg></div><div class="stat-label">Total Borrowed</div><div class="stat-value loading" id="stat-borrowed">Loading…</div></div>
-        <div class="glass-card stat-card stat-repayment"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 1l4 4-4 4"/></svg></div><div class="stat-label">Total Repayment</div><div class="stat-value loading" id="stat-repayment">Loading…</div></div>
-        <div class="glass-card stat-card stat-balance"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path stroke-linecap="round" d="M2 10h20"/></svg></div><div class="stat-label">Available Balance</div><div class="stat-value loading" id="stat-balance">Loading…</div></div>
-        <div class="glass-card stat-card stat-outstanding"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg></div><div class="stat-label">Outstanding Borrowed</div><div class="stat-value loading" id="stat-outstanding">Loading…</div></div>
+        <div class="glass-card stat-card stat-income"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></svg></div><div class="stat-label">Total Income</div><div class="stat-value loading" id="stat-income"><span class="skeleton-shimmer"></span></div></div>
+        <div class="glass-card stat-card stat-expense"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12l7 7 7-7"/></svg></div><div class="stat-label">Total Expenses</div><div class="stat-value loading" id="stat-expense"><span class="skeleton-shimmer"></span></div></div>
+        <div class="glass-card stat-card stat-borrowed"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 7v5l3 3"/></svg></div><div class="stat-label">Total Borrowed</div><div class="stat-value loading" id="stat-borrowed"><span class="skeleton-shimmer"></span></div></div>
+        <div class="glass-card stat-card stat-repayment"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 1l4 4-4 4"/></svg></div><div class="stat-label">Total Repayment</div><div class="stat-value loading" id="stat-repayment"><span class="skeleton-shimmer"></span></div></div>
+        <div class="glass-card stat-card stat-balance"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path stroke-linecap="round" d="M2 10h20"/></svg></div><div class="stat-label">Available Balance</div><div class="stat-value loading" id="stat-balance"><span class="skeleton-shimmer"></span></div></div>
+        <div class="glass-card stat-card stat-outstanding"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg></div><div class="stat-label">Outstanding Borrowed</div><div class="stat-value loading" id="stat-outstanding"><span class="skeleton-shimmer"></span></div></div>
       </div>
 
       <div class="chart-grid">
@@ -84,11 +93,29 @@
           <div class="empty-state" id="empty-category" style="display:none"><h4>No data yet</h4><p>Add expenses to see category breakdown.</p></div>
         </div>
       </div>
+
+      <!-- Recent Activity Section -->
+      <div class="glass-card section-card">
+        <div class="section-card-head">
+          <div><h2>Recent Financial Activity</h2><p>Latest transactions across all categories</p></div>
+          <a href="./transactions.html" class="btn-secondary" style="padding:7px 14px;font-size:0.82rem;">View All Transactions →</a>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Date</th><th>Type</th><th>Category/Source</th><th>Description</th><th>Amount</th></tr></thead>
+            <tbody id="recent-txns-list">
+              <tr><td colspan="5" class="cell-muted" style="text-align:center;padding:24px;">Loading recent activity...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </main>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<!-- Chart.js is loaded dynamically by dashboard.js in parallel with the
+     Firestore reads, not as a blocking script tag, so it never delays
+     the sidebar/cards/skeletons from appearing on screen. -->
 <script type="module" src="./js/dashboard.js"></script>
 </body>
 </html>

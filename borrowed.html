@@ -69,15 +69,24 @@
           <p>Add a record when you borrow money from someone.</p>
         </div>
         <div class="table-wrap">
-          <table class="data-table">
+          <table class="data-table" id="borrowed-table" style="display:contents">
             <thead><tr><th>From</th><th>Amount</th><th>Remaining</th><th>Reason</th><th>Borrow Date</th><th>Due Date</th><th>Status</th><th>Actions</th></tr></thead>
             <tbody id="borrowed-list"></tbody>
           </table>
+        </div>
+
+        <div class="pagination-bar" id="borrowed-pagination" style="display:none">
+          <span id="borrowed-pagination-label"></span>
+          <div style="display:flex;gap:8px;">
+            <button class="btn-secondary" id="borrowed-prev-page">Previous</button>
+            <button class="btn-secondary" id="borrowed-next-page">Next</button>
+          </div>
         </div>
       </div>
     </div>
   </main>
 </div>
+
 <div class="modal-overlay" id="borrowed-modal">
   <div class="glass-card modal-box">
     <button class="modal-close" data-modal-close aria-label="Close"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M18 6L6 18M6 6l12 12"/></svg></button>
@@ -85,11 +94,11 @@
     <form id="borrowed-form" novalidate>
       <div class="form-group">
         <label for="f-borrowedFrom">Borrowed From <span class="required-mark">*</span></label>
-        <input type="text" id="f-borrowedFrom" placeholder="Uncle Raj">
+        <input type="text" id="f-borrowedFrom" placeholder="Uncle Raj" required>
       </div>
       <div class="form-group">
         <label for="f-amount">Amount (₹) <span class="required-mark">*</span></label>
-        <input type="number" id="f-amount" min="0.01" step="0.01" placeholder="10000">
+        <input type="number" id="f-amount" min="0.01" step="0.01" placeholder="10000" required>
       </div>
       <div class="form-group">
         <label for="f-reason">Reason</label>
@@ -98,7 +107,7 @@
       <div class="modal-form-row">
         <div class="form-group">
           <label for="f-borrowDate">Borrow Date <span class="required-mark">*</span></label>
-          <input type="date" id="f-borrowDate">
+          <input type="date" id="f-borrowDate" required>
         </div>
         <div class="form-group">
           <label for="f-dueDate">Due Date</label>
@@ -116,6 +125,7 @@
     </form>
   </div>
 </div>
+
 <script type="module" src="./js/borrowed.js"></script>
 </body>
 </html>

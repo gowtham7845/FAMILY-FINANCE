@@ -23,6 +23,7 @@
       <a href="#overview" class="nav-link active" data-tab-link="overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Overview</a>
       <a href="#users" class="nav-link" data-tab-link="users"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path stroke-linecap="round" stroke-linejoin="round" d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>User Management</a>
       <a href="#finance" class="nav-link" data-tab-link="finance"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>Finance Management</a>
+      <a href="#reports" class="nav-link" data-tab-link="reports"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-6M12 17V7M15 17v-3M4 20h16"/></svg>Family Reports</a>
       <a href="#audit" class="nav-link" data-tab-link="audit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Audit Logs</a>
     </nav>
     <div class="sidebar-footer">
@@ -52,8 +53,8 @@
           <div class="glass-card stat-card stat-balance"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="stat-label">Total Family Members</div><div class="stat-value loading" id="mc-total-members">Loading…</div></div>
           <div class="glass-card stat-card stat-income"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg></div><div class="stat-label">Active Users</div><div class="stat-value loading" id="mc-active-members">Loading…</div></div>
           <div class="glass-card stat-card stat-expense"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M18 6L6 18M6 6l12 12"/></svg></div><div class="stat-label">Disabled Users</div><div class="stat-value loading" id="mc-disabled-members">Loading…</div></div>
-          <div class="glass-card stat-card stat-income"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></svg></div><div class="stat-label">Total Income</div><div class="stat-value loading" id="mc-total-income">Loading…</div></div>
-          <div class="glass-card stat-card stat-expense"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12l7 7 7-7"/></svg></div><div class="stat-label">Total Expenses</div><div class="stat-value loading" id="mc-total-expense">Loading…</div></div>
+          <div class="glass-card stat-card stat-income"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></svg></div><div class="stat-label">Family Total Income</div><div class="stat-value loading" id="mc-total-income">Loading…</div></div>
+          <div class="glass-card stat-card stat-expense"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12l7 7 7-7"/></svg></div><div class="stat-label">Family Total Expenses</div><div class="stat-value loading" id="mc-total-expense">Loading…</div></div>
           <div class="glass-card stat-card stat-borrowed"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 7v5l3 3"/></svg></div><div class="stat-label">Total Borrowed</div><div class="stat-value loading" id="mc-total-borrowed">Loading…</div></div>
           <div class="glass-card stat-card stat-repayment"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 1l4 4-4 4"/></svg></div><div class="stat-label">Total Repayments</div><div class="stat-value loading" id="mc-total-repayment">Loading…</div></div>
           <div class="glass-card stat-card stat-outstanding"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg></div><div class="stat-label">Outstanding Borrowed</div><div class="stat-value loading" id="mc-outstanding">Loading…</div></div>
@@ -64,7 +65,7 @@
       <section class="tab-panel" id="tab-users" style="display:none">
         <div class="glass-card section-card">
           <div class="section-card-head"><div><h2>Family Members</h2><p>View, edit, enable, or disable family accounts</p></div></div>
-          <div class="filter-bar"><input type="text" id="user-search" placeholder="Search by name or email..."></div>
+          <div class="filter-bar"><input type="text" id="user-search" placeholder="Search by name, email, or phone..."></div>
           <div class="loading-state" id="users-loading"><div class="spinner dark active"></div>Loading family members...</div>
           <div class="empty-state" id="users-empty" style="display:none"><h4>No family members yet.</h4><p>Registered accounts will appear here.</p></div>
           <div class="table-wrap">
@@ -73,13 +74,26 @@
               <tbody id="users-list"></tbody>
             </table>
           </div>
+          <div class="pagination-bar" id="users-pagination" style="display:none">
+            <span id="users-pagination-label"></span>
+            <div style="display:flex;gap:8px;">
+              <button class="btn-secondary" id="users-prev-page">Previous</button>
+              <button class="btn-secondary" id="users-next-page">Next</button>
+            </div>
+          </div>
         </div>
       </section>
 
       <!-- ===================== FINANCE MANAGEMENT ===================== -->
       <section class="tab-panel" id="tab-finance" style="display:none">
         <div class="glass-card section-card">
-          <div class="section-card-head"><div><h2>Family Financial Records</h2><p>All authorized family income, expenses, borrowed money, and repayments</p></div></div>
+          <div class="section-card-head">
+            <div><h2>Family Financial Records</h2><p>All authorized family income, expenses, borrowed money, and repayments</p></div>
+            <div class="topbar-actions">
+              <button class="btn-secondary" id="mc-download-csv"><span class="spinner"></span><span>Download CSV</span></button>
+              <button class="btn-primary" style="width:auto;padding:10px 18px;" id="mc-download-pdf"><span class="spinner"></span><span>Download PDF</span></button>
+            </div>
+          </div>
           <div class="chip-select" id="finance-type-filter">
             <button class="selected" data-type="all">All</button>
             <button data-type="income">Income</button>
@@ -87,8 +101,11 @@
             <button data-type="borrowed">Borrowed</button>
             <button data-type="repayment">Repayment</button>
           </div>
-          <div class="filter-bar" style="margin-top:14px;">
+          <div class="filter-bar" style="margin-top:14px;flex-wrap:wrap;gap:10px;">
             <input type="text" id="finance-search" placeholder="Search by member, category, reason, or date...">
+            <select id="mc-finance-user-filter">
+              <option value="all">All Members</option>
+            </select>
           </div>
           <div class="loading-state" id="finance-loading"><div class="spinner dark active"></div>Loading financial records...</div>
           <div class="empty-state" id="finance-empty" style="display:none"><h4>No records found.</h4><p>Try a different filter or search term.</p></div>
@@ -98,6 +115,111 @@
               <tbody id="finance-list"></tbody>
             </table>
           </div>
+          <div class="pagination-bar" id="finance-pagination" style="display:none">
+            <span id="finance-pagination-label"></span>
+            <div style="display:flex;gap:8px;">
+              <button class="btn-secondary" id="finance-prev-page">Previous</button>
+              <button class="btn-secondary" id="finance-next-page">Next</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== MASTER REPORTS ===================== -->
+      <section class="tab-panel" id="tab-reports" style="display:none">
+        <div class="glass-card section-card">
+          <div class="section-card-head">
+            <div><h2>Master Financial Reports</h2><p>Generate intelligence reports for all family members or specific accounts</p></div>
+          </div>
+
+          <div class="filter-bar" style="flex-wrap:wrap;gap:12px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <label for="mc-rep-target-user" style="font-size:0.85rem;color:var(--text-2);">Target:</label>
+              <select id="mc-rep-target-user" style="min-width:160px;">
+                <option value="all">All Family Members</option>
+              </select>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:8px;">
+              <label for="mc-rep-timeframe" style="font-size:0.85rem;color:var(--text-2);">Timeframe:</label>
+              <select id="mc-rep-timeframe" style="min-width:130px;">
+                <option value="monthly">Monthly</option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="yearly">Yearly</option>
+                <option value="custom">Custom Range</option>
+              </select>
+            </div>
+
+            <!-- Dynamic timeframe inputs -->
+            <div id="mc-ctrl-monthly" style="display:flex;gap:8px;">
+              <select id="mc-month-select" style="min-width:120px;">
+                <option value="1">January</option><option value="2">February</option><option value="3">March</option>
+                <option value="4">April</option><option value="5">May</option><option value="6">June</option>
+                <option value="7">July</option><option value="8">August</option><option value="9">September</option>
+                <option value="10">October</option><option value="11">November</option><option value="12">December</option>
+              </select>
+              <select id="mc-year-select" style="min-width:100px;"></select>
+            </div>
+
+            <div id="mc-ctrl-daily" style="display:none;">
+              <input type="date" id="mc-daily-date" style="min-width:140px;">
+            </div>
+
+            <div id="mc-ctrl-weekly" style="display:none;gap:8px;">
+              <select id="mc-weekly-preset" style="min-width:120px;">
+                <option value="this_week">This Week</option>
+                <option value="last_week">Last Week</option>
+              </select>
+            </div>
+
+            <div id="mc-ctrl-yearly" style="display:none;">
+              <select id="mc-yearly-year-select" style="min-width:110px;"></select>
+            </div>
+
+            <div id="mc-ctrl-custom" style="display:none;gap:8px;align-items:center;">
+              <input type="date" id="mc-custom-start" style="min-width:130px;">
+              <span style="color:var(--text-3);">to</span>
+              <input type="date" id="mc-custom-end" style="min-width:130px;">
+            </div>
+
+            <button class="btn-primary" style="width:auto;padding:10px 20px;" id="mc-generate-report">
+              <span class="spinner"></span><span>Generate Report</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Master Report Results -->
+        <div id="mc-report-results" style="display:none;margin-top:20px;">
+          <div class="glass-card section-card" style="text-align:center;">
+            <p style="font-size:0.75rem;letter-spacing:0.08em;color:var(--purple-light);text-transform:uppercase;font-weight:700;">Master Control Intelligence</p>
+            <h2 id="mc-report-title" style="margin-top:6px;">Family Financial Report</h2>
+            <p class="cell-muted" style="margin-top:4px;" id="mc-report-sub">—</p>
+
+            <div class="topbar-actions" style="margin-top:16px;justify-content:center;">
+              <button class="btn-secondary" id="mc-report-download-csv"><span class="spinner"></span><span>Download CSV</span></button>
+              <button class="btn-primary" style="width:auto;padding:10px 18px;" id="mc-report-download-pdf"><span class="spinner"></span><span>Download PDF</span></button>
+            </div>
+          </div>
+
+          <div class="stat-grid">
+            <div class="glass-card stat-card stat-income"><div class="stat-label">Total Income</div><div class="stat-value" id="mc-rep-income">₹0.00</div></div>
+            <div class="glass-card stat-card stat-expense"><div class="stat-label">Total Expenses</div><div class="stat-value" id="mc-rep-expense">₹0.00</div></div>
+            <div class="glass-card stat-card stat-balance"><div class="stat-label">Net Cash Flow</div><div class="stat-value" id="mc-rep-net">₹0.00</div></div>
+            <div class="glass-card stat-card stat-borrowed"><div class="stat-label">Total Borrowed</div><div class="stat-value" id="mc-rep-borrowed">₹0.00</div></div>
+            <div class="glass-card stat-card stat-repayment"><div class="stat-label">Total Repaid</div><div class="stat-value" id="mc-rep-repayment">₹0.00</div></div>
+            <div class="glass-card stat-card stat-outstanding"><div class="stat-label">Total Records</div><div class="stat-value" id="mc-rep-count">0</div></div>
+          </div>
+
+          <div class="glass-card section-card" style="margin-top:20px;">
+            <div class="section-card-head"><div><h2>Itemized Report Records</h2><p>All transactions matching this timeframe and member selection</p></div></div>
+            <div class="table-wrap">
+              <table class="data-table" style="display:contents">
+                <thead><tr><th>Member</th><th>Date</th><th>Type</th><th>Category/Source</th><th>Amount</th><th>Reason/Notes</th></tr></thead>
+                <tbody id="mc-report-table-body"></tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -105,13 +227,21 @@
       <section class="tab-panel" id="tab-audit" style="display:none">
         <div class="glass-card section-card">
           <div class="section-card-head"><div><h2>Audit Log</h2><p>Complete history of Master Control actions</p></div></div>
+          <div class="filter-bar"><input type="text" id="audit-search" placeholder="Search audit logs by action, target, or email..."></div>
           <div class="loading-state" id="audit-loading"><div class="spinner dark active"></div>Loading audit log...</div>
           <div class="empty-state" id="audit-empty" style="display:none"><h4>No audit records yet.</h4><p>Actions taken in Master Control will be logged here.</p></div>
           <div class="table-wrap">
             <table class="data-table" id="audit-table" style="display:contents">
-              <thead><tr><th>Action</th><th>Target</th><th>Reason</th><th>Performed By</th><th>Date/Time</th></tr></thead>
+              <thead><tr><th>Action</th><th>Target User</th><th>Record Type</th><th>Reason</th><th>Performed By</th><th>Date/Time</th></tr></thead>
               <tbody id="audit-list"></tbody>
             </table>
+          </div>
+          <div class="pagination-bar" id="audit-pagination" style="display:none">
+            <span id="audit-pagination-label"></span>
+            <div style="display:flex;gap:8px;">
+              <button class="btn-secondary" id="audit-prev-page">Previous</button>
+              <button class="btn-secondary" id="audit-next-page">Next</button>
+            </div>
           </div>
         </div>
       </section>
@@ -135,9 +265,9 @@
     <button class="modal-close" data-modal-close aria-label="Close"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M18 6L6 18M6 6l12 12"/></svg></button>
     <h3>Edit Member Profile</h3>
     <form id="edit-user-form" novalidate>
-      <div class="form-group"><label>Full Name <span class="required-mark">*</span></label><input type="text" id="eu-fullname"></div>
+      <div class="form-group"><label>Full Name <span class="required-mark">*</span></label><input type="text" id="eu-fullname" required></div>
       <div class="form-group"><label>Phone Number</label><input type="tel" id="eu-phone"></div>
-      <p class="cell-muted" style="margin-top:-6px;margin-bottom:14px;">Account type and status can only be changed via the Enable/Disable actions for security reasons.</p>
+      <p class="cell-muted" style="margin-top:-6px;margin-bottom:14px;font-size:0.8rem;">Account type and status are managed via separate security controls.</p>
       <div class="form-actions">
         <button type="button" class="btn-secondary" data-modal-close>Cancel</button>
         <button type="submit" class="btn-primary" id="edit-user-submit" style="width:auto"><span class="spinner"></span><span>Save Changes</span></button>
@@ -152,9 +282,9 @@
     <button class="modal-close" data-modal-close aria-label="Close"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M18 6L6 18M6 6l12 12"/></svg></button>
     <h3 id="ef-title">Edit Record</h3>
     <form id="edit-finance-form" novalidate>
-      <div class="form-group"><label id="ef-amount-label">Amount (₹) <span class="required-mark">*</span></label><input type="number" id="ef-amount" min="0.01" step="0.01"></div>
+      <div class="form-group"><label id="ef-amount-label">Amount (₹) <span class="required-mark">*</span></label><input type="number" id="ef-amount" min="0.01" step="0.01" required></div>
       <div class="form-group"><label id="ef-descriptor-label">Category / Source</label><input type="text" id="ef-descriptor"></div>
-      <div class="form-group"><label>Reason for Change <span class="required-mark">*</span></label><textarea id="ef-reason" placeholder="Explain why this record is being changed..."></textarea></div>
+      <div class="form-group"><label>Reason for Change <span class="required-mark">*</span></label><textarea id="ef-reason" placeholder="Explain why this record is being changed..." required></textarea></div>
       <div class="reason-box" id="ef-diff" style="display:none">
         <div class="diff-row"><span>Original Amount</span><span id="ef-original-amount">—</span></div>
         <div class="diff-row"><span>New Amount</span><span id="ef-new-amount">—</span></div>

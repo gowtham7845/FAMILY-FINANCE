@@ -62,7 +62,13 @@
             <option value="newest">Newest First</option>
             <option value="oldest">Oldest First</option>
           </select>
+          <select id="page-size-select">
+            <option value="10">10 per page</option>
+            <option value="25" selected>25 per page</option>
+            <option value="50">50 per page</option>
+          </select>
         </div>
+        <p class="cell-muted" style="margin:-6px 0 14px;font-size:0.76rem;">Search and filters apply to records loaded so far. Load more to search further back.</p>
 
         <div class="loading-state" id="txn-loading"><div class="spinner dark active"></div>Loading transaction history...</div>
         <div class="empty-state" id="txn-empty" style="display:none">
@@ -75,6 +81,10 @@
             <thead><tr><th>Date</th><th>Time</th><th>Type</th><th>Amount</th><th>Category</th><th>Reason</th><th>Created</th><th>Actions</th></tr></thead>
             <tbody id="txn-list"></tbody>
           </table>
+        </div>
+        <div class="pagination-bar" id="txn-pagination" style="display:none">
+          <span id="txn-pagination-label"></span>
+          <button class="btn-secondary" id="load-more-txns"><span class="spinner"></span><span>Load More</span></button>
         </div>
       </div>
     </div>

@@ -54,6 +54,12 @@
       <div class="glass-card section-card">
         <div class="filter-bar">
           <input type="text" id="search-input" placeholder="Search by person or notes...">
+          <select id="sort-select">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="highest">Highest Amount</option>
+            <option value="lowest">Lowest Amount</option>
+          </select>
         </div>
 
         <div class="loading-state" id="repayment-loading"><div class="spinner dark active"></div>Loading repayment records...</div>
@@ -63,33 +69,42 @@
           <p>Repay against a borrowed money record to see it here.</p>
         </div>
         <div class="table-wrap">
-          <table class="data-table">
+          <table class="data-table" id="repayment-table" style="display:contents">
             <thead><tr><th>Borrowed From</th><th>Amount</th><th>Date</th><th>Time</th><th>Notes</th><th>Actions</th></tr></thead>
             <tbody id="repayment-list"></tbody>
           </table>
+        </div>
+
+        <div class="pagination-bar" id="repayment-pagination" style="display:none">
+          <span id="repayment-pagination-label"></span>
+          <div style="display:flex;gap:8px;">
+            <button class="btn-secondary" id="repayment-prev-page">Previous</button>
+            <button class="btn-secondary" id="repayment-next-page">Next</button>
+          </div>
         </div>
       </div>
     </div>
   </main>
 </div>
+
 <div class="modal-overlay" id="repayment-modal">
   <div class="glass-card modal-box">
     <button class="modal-close" data-modal-close aria-label="Close"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M18 6L6 18M6 6l12 12"/></svg></button>
-    <h3>Add Repayment</h3>
+    <h3 id="modal-title">Add Repayment</h3>
     <form id="repayment-form" novalidate>
       <div class="form-group">
         <label for="f-borrowedId">Borrowed Record <span class="required-mark">*</span></label>
-        <select id="f-borrowedId"></select>
+        <select id="f-borrowedId" required></select>
         <div class="cell-muted" id="remaining-hint" style="margin-top:6px;font-size:0.78rem;"></div>
       </div>
       <div class="form-group">
         <label for="f-repaymentAmount">Repayment Amount (₹) <span class="required-mark">*</span></label>
-        <input type="number" id="f-repaymentAmount" min="0.01" step="0.01" placeholder="2000">
+        <input type="number" id="f-repaymentAmount" min="0.01" step="0.01" placeholder="2000" required>
       </div>
       <div class="modal-form-row">
         <div class="form-group">
           <label for="f-repaymentDate">Repayment Date <span class="required-mark">*</span></label>
-          <input type="date" id="f-repaymentDate">
+          <input type="date" id="f-repaymentDate" required>
         </div>
         <div class="form-group">
           <label for="f-repaymentTime">Repayment Time</label>
@@ -107,6 +122,7 @@
     </form>
   </div>
 </div>
+
 <script type="module" src="./js/repayments.js"></script>
 </body>
 </html>
